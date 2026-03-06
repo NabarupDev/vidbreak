@@ -1,0 +1,83 @@
+{
+  "name": "vidbreak",
+  "version": "0.1.0",
+  "description": "The modern, lightweight, drop-in replacement for fluent-ffmpeg",
+  "keywords": [
+    "ffmpeg", "video", "transcoding", "hls", "adaptive-streaming",
+    "mp4", "webm", "av1", "video-processing", "typescript"
+  ],
+  "homepage": "https://github.com/vidbreak/vidbreak",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vidbreak/vidbreak.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vidbreak/vidbreak/issues"
+  },
+  "license": "MIT",
+  "author": "vidbreak contributors",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/esm/utils/index.js",
+      "require": "./dist/cjs/utils/index.cjs",
+      "types": "./dist/types/utils/index.d.ts"
+    },
+    "./errors": {
+      "import": "./dist/esm/errors/index.js",
+      "require": "./dist/cjs/errors/index.cjs",
+      "types": "./dist/types/errors/index.d.ts"
+    }
+  },
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run build && npm run typecheck && npm run test",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "p-limit": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "eslint": "^8.0.0",
+    "release-it": "^17.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.0.0"
+  },
+  "peerDependencies": {
+    "ffmpeg-static": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "ffmpeg-static": {
+      "optional": true
+    }
+  }
+}
