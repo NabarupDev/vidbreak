@@ -33,18 +33,19 @@ describe('BinaryLocator', () => {
     expect(result.ffprobe).toBe('/env/ffprobe');
   });
 
-  it('throws FFmpegNotFoundError with install instructions when nothing found', async () => {
+  it('resolves bundled ffmpeg-static even when system PATH is empty', async () => {
     // Clear all paths
     delete process.env['FFMPEG_PATH'];
     delete process.env['FFPROBE_PATH'];
 
-    // This test may find system ffmpeg; only test when we know it won't be found
-    // by overriding PATH to empty
     const origPath = process.env['PATH'];
     process.env['PATH'] = '';
 
     try {
-      await expect(locateBinaries()).rejects.toThrow(FFmpegNotFoundError);
+      const result = await locateBinaries();
+      // ffmpeg-static is now a direct dependency, so it should always resolve
+      expect(result.ffmpeg).toContain('ffmpeg');
+      expect(result.ffprobe).toContain('ffprobe');
     } finally {
       process.env['PATH'] = origPath;
     }

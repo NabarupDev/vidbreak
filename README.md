@@ -56,25 +56,18 @@ That's it. No FFmpeg flags. No callback hell. No manual pipe management.
 
 ## Installation
 
-### Prerequisites
-
-vidbreak requires FFmpeg ≥ 5.0 to be installed on the system.
-
 ```bash
-# macOS
-brew install ffmpeg
-
-# Ubuntu / Debian
-sudo apt install ffmpeg
-
-# Windows (via Chocolatey)
-choco install ffmpeg
-
-# Or use the bundled binary helper
-npm install vidbreak ffmpeg-static
+npm install vidbreak
 ```
 
-vidbreak auto-detects `ffmpeg-static` if present — zero manual path configuration needed.
+**FFmpeg is bundled automatically** — no separate install needed. vidbreak ships with `ffmpeg-static` and `@ffprobe-installer/ffprobe`, so FFmpeg and ffprobe binaries are downloaded for your platform during `npm install`.
+
+If you already have FFmpeg installed on your system, vidbreak will use the bundled version by default but you can point to your own binary via:
+
+- `options.ffmpegPath` / `options.ffprobePath`
+- `FFMPEG_PATH` / `FFPROBE_PATH` environment variables
+
+vidbreak auto-detects binaries in this priority order: explicit options → environment variables → bundled binaries → system PATH.
 
 ---
 

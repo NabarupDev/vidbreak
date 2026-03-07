@@ -39,6 +39,19 @@ function tryFFmpegStatic(): string | null {
 }
 
 /**
+ * Try to require @ffprobe-installer/ffprobe and return its path.
+ */
+function tryFFprobeInstaller(): string | null {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const installer = require('@ffprobe-installer/ffprobe') as { path: string };
+    return installer.path;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Locate FFmpeg and ffprobe binaries using the priority order:
  * 1. Explicit options
  * 2. Environment variables
@@ -70,11 +83,17 @@ export async function locateBinaries(options?: {
     ffprobe = process.env['FFPROBE_PATH'];
   }
 
-  // 3. ffmpeg-static
+  // 3. Bundled binaries (ffmpeg-static / @ffprobe-installer/ffprobe)
   if (!ffmpeg) {
     const staticPath = tryFFmpegStatic();
     if (staticPath) {
       ffmpeg = staticPath;
+    }
+  }
+  if (!ffprobe) {
+    const probePath = tryFFprobeInstaller();
+    if (probePath) {
+      ffprobe = probePath;
     }
   }
 

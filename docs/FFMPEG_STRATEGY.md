@@ -23,9 +23,11 @@ vidbreak's FFmpeg strategy prioritises:
 Priority order:
 1. options.ffmpegPath (explicit user override)
 2. process.env.FFMPEG_PATH (environment variable)
-3. require('ffmpeg-static') (optional peer dependency)
+3. Bundled binaries (ffmpeg-static + @ffprobe-installer/ffprobe — installed as dependencies)
 4. which ffmpeg (system PATH — cross-platform)
 ```
+
+FFmpeg is bundled as a direct dependency via `ffmpeg-static`, so users never need to install it manually. The bundled binary is used automatically unless overridden.
 
 Minimum required FFmpeg version: **5.0** (for AV1/fMP4 HLS support).
 
