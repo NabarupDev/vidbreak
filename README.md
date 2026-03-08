@@ -1,6 +1,4 @@
-# Filename: README.md
-
-# vidbreak 🎬
+# vidbreak
 
 > **The modern, lightweight, drop-in replacement for the now-deprecated `fluent-ffmpeg`**
 
@@ -168,4 +166,4 @@ const result = await vidbreak('./input.mp4', {
 
 ## License
 
-MIT © 2025 vidbreak contributors
+MIT © 2026 vidbreak contributors
